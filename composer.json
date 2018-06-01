@@ -1,0 +1,37 @@
+{
+    "name": "fidanzaepsi/slim-container",
+    "description": "slim-container",
+    "keywords": ["framework", "slim"],
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Fidanza Frank",
+            "email": "frank.fidanza@epsi.fr"
+        }
+    ],
+    "require": {
+        "php": ">=7.1.0",
+        "slim/slim": "^3.8",
+        "vlucas/phpdotenv": "^2.4",
+        "league/container": "^2.4",
+        "hassankhan/config": "^1.0"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+          "App\\": "app"
+        },
+        "files": ["app/helpers.php"]
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"file_exists('.env') ?: copy('.env.dist', '.env');\""
+        ],
+        "post-update-cmd": [
+            "php -r \"file_exists('.env') ?: copy('.env.dist', '.env');\""
+        ]
+    }
+}
