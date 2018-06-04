@@ -19,14 +19,16 @@ class ConfigServiceProvider extends AbstractServiceProvider
         $container->share('config', function () {
             return new Config([
                 base_path('config/app.php'),
-                base_path('config/database.php')
+                base_path('config/database.php'),
+                base_path('config/views.php')
             ]);
         });
 
         $container->share(Config::class, function () {
             return new Config([
                 base_path('config/app.php'),
-                base_path('config/database.php')
+                base_path('config/database.php'),
+                base_path('config/views.php')
             ]);
         });
 

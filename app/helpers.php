@@ -1,6 +1,8 @@
 <?php
 
-use Symfony\Component\VarDumper\{VarDumper, Dumper\HtmlDumper, Dumper\CliDumper, Cloner\VarCloner};
+use Symfony\Component\VarDumper\{
+    VarDumper, Dumper\HtmlDumper, Dumper\CliDumper, Cloner\VarCloner
+};
 
 VarDumper::setHandler(function ($var) {
     $cloner = new VarCloner;

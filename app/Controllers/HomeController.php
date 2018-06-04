@@ -2,17 +2,14 @@
 
 namespace App\Controllers;
 
-use Noodlehaus\Config;
 use Slim\Http\Request;
 use Slim\Http\Response;
 
-class HomeController
+class HomeController extends Controller
 {
-    
-    public function index(Request $request, Response $response, Config $c)
-    {
-        dump($c);
-        $response->write('Home');
-        return $response->withStatus(200);
+
+    public function index(Request $request, Response $response)
+    {   
+        return $this->view->render($response, 'templates/index.twig');
     }
 }

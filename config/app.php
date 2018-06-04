@@ -6,12 +6,12 @@ return [
         'responseChunkSize' => 4096,
         'outputBuffering' => 'append',
         'determineRouteBeforeAppMiddleware' => true,
-        'displayErrorDetails' => getenv('APP_ENV') === 'dev',
+        'displayErrorDetails' => env('APP_ENV') === 'dev',
     ],
     'middlewares' => [
         //
     ],
     'providers' => [
-        //
+        'App\Providers\ViewServiceProvider'
     ]
 ];
