@@ -10,6 +10,6 @@ class HomeController extends Controller
 
     public function index(Request $request, Response $response)
     {   
-        return $this->view->render($response, 'templates/index.twig');
+        return $this->view->render($response, 'templates/index.twig', compact('user'));
     }
 }

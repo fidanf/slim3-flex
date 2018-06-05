@@ -12,6 +12,7 @@ return [
         //
     ],
     'providers' => [
-        'App\Providers\ViewServiceProvider'
+        'App\Providers\ViewServiceProvider',
+        'App\Providers\DatabaseServiceProvider',
     ]
 ];
