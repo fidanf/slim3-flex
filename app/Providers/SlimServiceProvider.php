@@ -2,15 +2,18 @@
 
 namespace App\Providers;
 
+use App\Views\View;
+use App\Exceptions\NotFoundHandler;
 use App\Strategies\AutoWiringStrategy;
 use League\Container\ServiceProvider\AbstractServiceProvider;
+
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Slim\CallableResolver;
 use Slim\Handlers\Error;
 use Slim\Handlers\NotAllowed;
-use Slim\Handlers\NotFound;
+// use Slim\Handlers\NotFound; // Replaced by custom NotFoundHandler
 use Slim\Handlers\PhpError;
 use Slim\Http\Environment;
 use Slim\Http\Headers;
@@ -122,7 +125,7 @@ class SlimServiceProvider extends AbstractServiceProvider
         });
 
         $this->container->share('notFoundHandler', function () {
-            return new NotFound;
+            return new NotFoundHandler($this->container->get(View::class));
         });
 
         $this->container->share('notAllowedHandler', function () {

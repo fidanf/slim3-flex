@@ -29,4 +29,9 @@ class View
             $this->twig->addGlobal($key, $value);
         }
     }
+
+    public function exists(string $template)
+    {
+        return $this->twig->getLoader()->exists($template);
+    }
 }
