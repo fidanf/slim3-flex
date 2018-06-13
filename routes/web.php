@@ -5,3 +5,4 @@ $app->get('/hello/{name}', function (Slim\Http\Request $request, Slim\Http\Respo
 })->setName('hello');
 
 $app->get('/', App\Controllers\HomeController::class . ':index');
+$app->post('/', App\Controllers\HomeController::class . ':newAction');

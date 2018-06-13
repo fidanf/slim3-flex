@@ -17,7 +17,8 @@
         "league/container": "^2.4",
         "hassankhan/config": "^1.0",
         "twig/twig": "^2.4",
-        "illuminate/database": "^5.6"
+        "illuminate/database": "^5.6",
+        "vlucas/valitron": "^1.4"
     },
     "require-dev": {
         "symfony/var-dumper": "^3.2"

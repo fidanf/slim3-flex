@@ -11,4 +11,11 @@ class HomeController extends Controller
     {   
         return $this->view->render($response, 'templates/index.twig');
     }
+
+    public function newAction(Request $request, Response $response)
+    {
+        $this->validate($request, [
+            'email' => ['required', 'email'],
+        ]);
+    }
 }
