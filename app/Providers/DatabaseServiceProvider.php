@@ -5,14 +5,15 @@ namespace App\Providers;
 use App\Database\DatabaseInterface;
 use App\Database\Eloquent;
 use League\Container\ServiceProvider\AbstractServiceProvider;
+use League\Container\ServiceProvider\BootableServiceProviderInterface;
 
-class DatabaseServiceProvider extends AbstractServiceProvider
+class DatabaseServiceProvider extends AbstractServiceProvider implements BootableServiceProviderInterface
 {
     protected $provides = [
         DatabaseInterface::class
     ];
 
-    public function register()
+    public function boot()
     {
         $container = $this->getContainer();
 
@@ -22,11 +23,18 @@ class DatabaseServiceProvider extends AbstractServiceProvider
             
             $capsule = new Eloquent;
             $capsule->addConnection($config->get('db'));
-            $capsule->setAsGlobal();
-            $capsule->bootEloquent();
             
             return $capsule;
+            
         });
 
+        $eloquent = $container->get(DatabaseInterface::class);
+        $eloquent->bootEloquent();
+        $eloquent->setAsGlobal();
+    }
+
+    public function register()
+    {
+        //
     }
 }
