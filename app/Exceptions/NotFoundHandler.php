@@ -47,6 +47,6 @@ class NotFoundHandler extends AbstractHandler
             return $this->view->render($response, 'errors/404.twig');
         }
 
-        return $response->write('Not found');
+        return $response->write('404 Not found');
     }
 }

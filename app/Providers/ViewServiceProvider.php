@@ -2,13 +2,12 @@
 
 namespace App\Providers;
 
-use Twig_Environment;
-use Twig_Extension_Debug;
-use Twig_Loader_Filesystem;
-use App\Views\View;
-use App\Views\Extensions\DumpExtension;
+use App\Views\Extensions\DebugExtension;
 use App\Views\Extensions\RouteExtension;
+use App\Views\View;
 use League\Container\ServiceProvider\AbstractServiceProvider;
+use Twig_Environment;
+use Twig_Loader_Filesystem;
 
 class ViewServiceProvider extends AbstractServiceProvider
 {
@@ -31,12 +30,12 @@ class ViewServiceProvider extends AbstractServiceProvider
                 'debug' => $config->get('twig.debug')
             ]);
 
-            $twig->addExtension(new Twig_Extension_Debug);
-            $twig->addExtension(new DumpExtension);
             $twig->addExtension(new RouteExtension(
                 $container->get('router'),
                 $container->get('request')->getUri()
             ));
+
+            $twig->addExtension(new DebugExtension);
 
             foreach ($config->get('twig.globals') as $key => $value) {
                 $twig->addGlobal($key, $value);
