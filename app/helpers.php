@@ -1,26 +1,5 @@
 <?php
 
-use Symfony\Component\VarDumper\{
-    VarDumper, Dumper\HtmlDumper, Dumper\CliDumper, Cloner\VarCloner
-};
-
-VarDumper::setHandler(function ($var) {
-    $cloner = new VarCloner;
-    $htmlDumper = new HtmlDumper;
-    
-    $htmlDumper->setStyles([
-        'default' => 'background-color:#f6f6f6; color:#222; line-height:1.3em; 
-            font-weight:normal; font:16px Monaco, Consolas, monospace; 
-            word-wrap: break-word; white-space: pre-wrap; position:relative; 
-            z-index:100000',
-        'public' => 'color:#ec9114',
-        'protected' => 'color:#ec9114',
-        'private' => 'color:#ec9114',
-    ]);
-    $dumper = PHP_SAPI === 'cli' ? new CliDumper : $htmlDumper;
-    $dumper->dump($cloner->cloneVar($var));
-});
-
 if (!function_exists('base_path')) {
     function base_path($path = '') {
         return __DIR__ . '/..//' . ($path ? DIRECTORY_SEPARATOR . $path : $path);
