@@ -4,11 +4,19 @@ namespace App\Exceptions;
 
 use Exception;
 use ReflectionClass;
-use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
+use Slim\Http\Request;
+use Slim\Http\Response;
+use App\Session\SessionInterface;
 
 class ExceptionHandler
 {
+    protected $session;
+
+    public function __construct(SessionInterface $session)
+    {
+        $this->session = $session;
+    }
+
     public function __invoke(Request $request, Response $response, Exception $exception)
     {
         $shortName = $this->getClassShortName($exception);
@@ -20,22 +28,22 @@ class ExceptionHandler
         return $this->unhandledException($exception);
     }
 
-    protected function getClassShortName(Exception $e)
+    private function getClassShortName(Exception $e)
     {
         return (new ReflectionClass($e))->getShortName();
     }
 
     private function handleValidationException(Request $request, Response $response, Exception $e)
     {
-        // dump($e->getErrors(), $e->getPath(), $e->getOldInput());
+         $this->session->set([
+            'errors' => $e->getErrors(),
+            'old' => $e->getOldInput(),
+        ]);
 
-        // TODO
-        // Store into Session
-        // create ClearValidationErrors middleware
         return $response->withRedirect($e->getPath());
     }
 
-    public function unhandledException(Exception $e)
+    private function unhandledException(Exception $e)
     {
         throw $e;
     }

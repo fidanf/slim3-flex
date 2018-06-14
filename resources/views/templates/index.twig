@@ -4,6 +4,7 @@
     Hello page : <a href="{{ route('hello', { 'name': 'World' }) }}">Here</a>
 </div>
 
+{{ errors.email | first }}
 <form action="/" method="POST">
     <label for="email">Email :</label>
     <input type="text" name="email" id="email">

@@ -9,10 +9,12 @@ return [
         'displayErrorDetails' => env('APP_ENV') === 'dev',
     ],
     'middlewares' => [
-        //
+        'App\Middlewares\ShareValidationErrors',
+        'App\Middlewares\ClearValidationErrors',
     ],
     'providers' => [
         'App\Providers\ViewServiceProvider',
         'App\Providers\DatabaseServiceProvider',
+        'App\Providers\SessionServiceProvider',
     ]
 ];

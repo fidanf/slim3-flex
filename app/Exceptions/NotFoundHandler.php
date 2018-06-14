@@ -3,9 +3,9 @@
 namespace App\Exceptions;
 
 use App\Views\View;
-use Psr\Http\Message\RequestInterface as Request;
-use Psr\Http\Message\ResponseInterface as Response;
 use Slim\Handlers\AbstractHandler;
+use Slim\Http\Request;
+use Slim\Http\Response;
 
 class NotFoundHandler extends AbstractHandler
 {

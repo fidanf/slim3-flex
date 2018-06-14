@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Views\View;
 use App\Exceptions\ExceptionHandler;
 use App\Exceptions\NotFoundHandler;
+use App\Session\SessionInterface;
 use App\Strategies\AutoWiringStrategy;
+use App\Views\View;
 use League\Container\ServiceProvider\AbstractServiceProvider;
-
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -121,7 +121,7 @@ class SlimServiceProvider extends AbstractServiceProvider
 
         $this->container->share('errorHandler', function () {
             // return new Error($this->container->get('settings')['displayErrorDetails']);
-            return new ExceptionHandler;
+            return new ExceptionHandler($this->container->get(SessionInterface::class));
         });
 
         $this->container->share('notFoundHandler', function () {
