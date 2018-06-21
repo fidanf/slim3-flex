@@ -7,10 +7,12 @@ use App\Exceptions\NotFoundHandler;
 use App\Session\SessionInterface;
 use App\Strategies\AutoWiringStrategy;
 use App\Views\View;
-use League\Container\ServiceProvider\AbstractServiceProvider;
+
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use League\Container\ServiceProvider\AbstractServiceProvider;
+
 use Slim\CallableResolver;
 use Slim\Handlers\NotAllowed;
 use Slim\Handlers\PhpError;
@@ -121,7 +123,10 @@ class SlimServiceProvider extends AbstractServiceProvider
 
         $this->container->share('errorHandler', function () {
             // return new Error($this->container->get('settings')['displayErrorDetails']);
-            return new ExceptionHandler($this->container->get(SessionInterface::class));
+            return new ExceptionHandler(
+                $this->container->get(SessionInterface::class),
+                $this->container->get(View::class)
+            );
         });
 
         $this->container->share('notFoundHandler', function () {

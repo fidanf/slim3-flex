@@ -9,4 +9,5 @@
     <label for="email">Email :</label>
     <input type="text" name="email" id="email">
     <input type="submit" value="Submit">
+    <input type="hidden" name="{{ csrf.key }}" value="{{ csrf.token }}">
 </form>
