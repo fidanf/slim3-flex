@@ -55,7 +55,7 @@ class ExceptionHandler
 
     protected function handleCsrfTokenException(Exception $e)
     {
-        return $this->view->render($this->response, 'errors/csrf.twig');
+        return $this->view->render($this->response->withStatus(403), 'errors/csrf.twig');
     }
 
     private function unhandledException(Exception $e)
