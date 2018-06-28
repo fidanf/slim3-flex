@@ -17,5 +17,9 @@ class HomeController extends Controller
         $this->validate($request, [
             'email' => ['required', 'email'],
         ]);
+
+        $this->flash->now('success', 'Email was successfull');
+        
+        return $response->withRedirect($request->getUri()->getPath());
     }
 }

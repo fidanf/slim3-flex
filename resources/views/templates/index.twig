@@ -1,13 +1,14 @@
-<p>{{ app_name }}</p>
-<h1>Index</h1>
-<div>
-    Hello page : <a href="{{ route('hello', { 'name': 'World' }) }}">Here</a>
-</div>
+{% extends 'base.twig' %}
 
-{{ errors.email | first }}
-<form action="/" method="POST">
-    <label for="email">Email :</label>
-    <input type="text" name="email" id="email">
-    <input type="submit" value="Submit">
-    <input type="hidden" name="{{ csrf.key }}" value="{{ csrf.token }}">
-</form>
+{% block content %}
+    <h1>Index</h1>
+
+    {{ errors.email | first }}
+    <form action="/" method="POST">
+        <label for="email">Email :</label>
+        <input type="text" name="email" id="email">
+        <input type="submit" value="Submit">
+        <input type="hidden" name="{{ csrf.key }}" value="{{ csrf.token }}">
+    </form>
+{% endblock %}
+

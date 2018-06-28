@@ -18,6 +18,8 @@ return [
         'App\Providers\DatabaseServiceProvider',
         'App\Providers\SessionServiceProvider',
         'App\Providers\CsrfServiceProvider',
+        'App\Providers\FlashServiceProvider',
+        'App\Providers\ValidationServiceProvider',
         'App\Providers\ViewShareServiceProvider',
     ]
 ];
