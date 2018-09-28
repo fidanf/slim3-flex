@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\HasherInterface;
+use RuntimeException;
 
 class Bcrypt implements HasherInterface
 {
