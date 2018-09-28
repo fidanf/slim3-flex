@@ -15,6 +15,7 @@ return [
     ],
     'providers' => [
         'App\Providers\ViewServiceProvider',
+        'App\Providers\AuthServiceProvider',
         'App\Providers\DatabaseServiceProvider',
         'App\Providers\SessionServiceProvider',
         'App\Providers\CsrfServiceProvider',
