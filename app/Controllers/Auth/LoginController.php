@@ -44,6 +44,6 @@ class LoginController extends Controller
             return $response->withRedirect($request->getUri()->getPath());
         }
 
-        return $response->withRedirect('/');
+        return $response->withRedirect('/profile');
     }
 }

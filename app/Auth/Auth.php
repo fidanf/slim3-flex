@@ -23,9 +23,9 @@ class Auth
         $this->userProvider = $userProvider;
     }
 
-    public function attempt($username, $password, $remember = false)
+    public function attempt($email, $password, $remember = false)
     {
-        $user = $this->userProvider->getByUsername($username);
+        $user = $this->userProvider->getByEmail($email);
 
         if (!$user || !$this->hasValidCredentials($user, $password)) {
             return false;
@@ -92,6 +92,11 @@ class Auth
     public function hasRecaller()
     {
         //
+    }
+
+    public function logout()
+    {
+        $this->session->clear($this->key());
     }
 
 }

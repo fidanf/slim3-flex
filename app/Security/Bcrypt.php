@@ -12,7 +12,7 @@ class Bcrypt implements HasherInterface
 
     public function create($plain)
     {
-        $hash = password_hash($plain, PASSWORD_BCRYPT, $this->options());
+        $hash = password_hash($plain, PASSWORD_BCRYPT, $this->getOptions());
 
         if (!$hash) {
             throw new RuntimeException('Bcrypt not supported.');

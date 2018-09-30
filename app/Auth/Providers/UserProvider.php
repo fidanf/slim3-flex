@@ -9,9 +9,9 @@ use App\Models\User;
 class UserProvider implements UserProviderInterface
 {
 
-    public function getByUsername($username)
+    public function getByEmail($email)
     {
-        return User::where('username', $username)->first();
+        return User::where('email', $email)->first();
     }
 
     public function getById($id)
