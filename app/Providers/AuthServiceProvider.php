@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Auth\Auth;
 use App\Auth\Providers\UserProvider;
-use App\Security\HasherInterface;
+use App\Auth\Hashing\HasherInterface;
 use App\Session\SessionInterface;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 

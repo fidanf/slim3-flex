@@ -5,9 +5,9 @@ namespace App\Controllers\Auth;
 
 
 use App\Auth\Auth;
+use App\Auth\Hashing\HasherInterface;
 use App\Controllers\Controller;
 use App\Models\User;
-use App\Security\HasherInterface;
 use App\Views\View;
 use Slim\Http\Request;
 use Slim\Http\Response;

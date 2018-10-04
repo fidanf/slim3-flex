@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Security\Bcrypt;
-use App\Security\HasherInterface;
+use App\Auth\Hashing\Bcrypt;
+use App\Auth\Hashing\HasherInterface;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
 class HashServiceProvider extends AbstractServiceProvider
@@ -15,7 +15,7 @@ class HashServiceProvider extends AbstractServiceProvider
     public function register()
     {
         $this->getContainer()->share(HasherInterface::class, function () {
-            return new Bcrypt();
+            return new Bcrypt;
         });
     }
 }

@@ -31,12 +31,12 @@ class CsrfGuard
         return $next($request, $response);
     }
 
-    protected function getTokenFromRequest($request)
+    protected function getTokenFromRequest(Request $request)
     {
         return $request->getParsedBody()[$this->csrf->key()] ?? null;
     }
 
-    protected function requestRequiresProtection($request)
+    protected function requestRequiresProtection(Request $request)
     {
         return in_array($request->getMethod(), $this->methods);
     }

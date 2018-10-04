@@ -11,6 +11,7 @@ return [
     'middlewares' => [
         'App\Middlewares\ShareValidationErrors',
         'App\Middlewares\ClearValidationErrors',
+        'App\Middlewares\Authenticate',
         'App\Middlewares\CsrfGuard',
     ],
     'providers' => [

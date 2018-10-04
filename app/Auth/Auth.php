@@ -4,9 +4,10 @@
 namespace App\Auth;
 
 
+use App\Auth\Hashing\HasherInterface;
 use App\Auth\Providers\UserProviderInterface;
-use App\Security\HasherInterface;
 use App\Session\SessionInterface;
+use Exception;
 
 class Auth
 {
@@ -15,6 +16,8 @@ class Auth
     protected $hasher;
 
     protected $userProvider;
+
+    protected $user;
 
     public function __construct(SessionInterface $session, HasherInterface $hasher, UserProviderInterface $userProvider)
     {
@@ -61,7 +64,7 @@ class Auth
 
     public function user()
     {
-        return $this->userProvider;
+        return $this->user;
     }
 
     private function needsRehash($user)
@@ -87,6 +90,17 @@ class Auth
     public function setUserFromCookie()
     {
         //
+    }
+
+    public function setUserFromSession()
+    {
+        $user = $this->userProvider->getById($this->session->get($this->key()));
+
+        if (!$user) {
+            throw new Exception;
+        }
+
+        $this->user = $user;
     }
 
     public function hasRecaller()

@@ -17,7 +17,7 @@ class ExceptionHandler
 
     protected $request;
 
-    protected $reponse;
+    protected $response;
 
     public function __construct(SessionInterface $session, View $view)
     {

@@ -10,28 +10,34 @@
       <li class="nav-item active">
         <a class="nav-link" href="{{ route('home') }}">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ route('profile') }}">Profile</a>
-      </li>
+        {% if auth.check %}
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('profile') }}">Profile</a>
+        </li>
+        {% endif %}
     </ul>
 
     <ul class="navbar-nav">
-        {#{% if auth.check %}#}
-          {#<li class="nav-item">#}
-            {#<a class="nav-link" href="#">{{ auth.user.name }}</a>#}
-          {#</li>#}
-          {#<li class="nav-item">#}
-            {#<a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout').submit();">Sign out</a>#}
-          {#</li>#}
-        {#{% else %}#}
+        {% if auth.check %}
+          <li class="nav-item">
+            Welcome {{ auth.user.username }}
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout').submit();">Sign out</a>
+          </li>
+        {% else %}
           <li class="nav-item">
             <a class="nav-link" href="{{ route('auth.login') }}" >Login</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{ route('auth.register') }}">Register</a>
           </li>
-        {#{% endif %}#}
+        {% endif %}
     </ul>
     
   </div>
 </nav>
+
+<form action="{{ route('auth.logout') }}" method="POST" style="display: none;" id="logout">
+    <input type="hidden" name="{{ csrf.key }}" value="{{ csrf.token }}">
+</form>
