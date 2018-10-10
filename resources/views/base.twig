@@ -10,8 +10,8 @@
     </head>
     <body>
         {% include 'partials/_navigation.twig' %}
-        {% include 'partials/_flash.twig' %}
         <div class="container">
+            {% include 'partials/_flash.twig' %}
             {% block content %}{% endblock %}
         </div>
     </body>
