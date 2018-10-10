@@ -26,5 +26,6 @@ return [
         'App\Providers\FlashServiceProvider',
         'App\Providers\ValidationServiceProvider',
         'App\Providers\ViewShareServiceProvider',
+        'App\Providers\PaginationServiceProvider',
     ]
 ];

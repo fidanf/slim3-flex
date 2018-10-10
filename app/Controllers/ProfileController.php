@@ -3,6 +3,7 @@
 
 namespace App\Controllers;
 
+use App\Models\User;
 use App\Views\View;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -18,6 +19,7 @@ class ProfileController extends Controller
 
     public function index(Request $request, Response $response)
     {
-        return $this->view->render($response, 'templates/profile.twig');
+        $users = User::paginate(2);
+        return $this->view->render($response, 'templates/profile.twig', compact('users'));
     }
 }

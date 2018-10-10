@@ -17,7 +17,7 @@ class View
     public function render(ResponseInterface $response, $view, $data = [])
     {
         $response->getBody()->write(
-            $this->twig->render($view, $data)
+            $this->make($view, $data)
         );
 
         return $response;
@@ -33,5 +33,10 @@ class View
     public function exists(string $template)
     {
         return $this->twig->getLoader()->exists($template);
+    }
+
+    public function make($view, $data = [])
+    {
+        return $this->twig->render($view, $data);
     }
 }
