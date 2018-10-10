@@ -145,9 +145,10 @@ class Auth
     public function logout()
     {
         $this->session->clear($this->key());
-        
+
         if ($this->hasRecaller()) {
             $this->cookie->clear('remember');
+            $this->userProvider->clearUserRememberToken($this->user->id);
         }
     }
 
