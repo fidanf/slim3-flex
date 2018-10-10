@@ -6,6 +6,7 @@ namespace App\Auth;
 
 use App\Auth\Hashing\HasherInterface;
 use App\Auth\Providers\UserProviderInterface;
+use App\Cookie\CookieJar;
 use App\Session\SessionInterface;
 use Exception;
 
@@ -15,15 +16,26 @@ class Auth
 
     protected $hasher;
 
+    protected $recaller;
+
     protected $userProvider;
+
+    protected $cookie;
 
     protected $user;
 
-    public function __construct(SessionInterface $session, HasherInterface $hasher, UserProviderInterface $userProvider)
-    {
+    public function __construct(
+        SessionInterface $session, 
+        HasherInterface $hasher, 
+        Recaller $recaller, 
+        UserProviderInterface $userProvider, 
+        CookieJar $cookie
+    ) {
         $this->session = $session;
         $this->hasher = $hasher;
+        $this->recaller = $recaller;
         $this->userProvider = $userProvider;
+        $this->cookie = $cookie;
     }
 
     public function attempt($email, $password, $remember = false)
@@ -82,14 +94,9 @@ class Auth
         return $this->session->exists($this->key());
     }
 
-    private function setRememberToken($user)
+    public function hasRecaller()
     {
-        //
-    }
-
-    public function setUserFromCookie()
-    {
-        //
+        return $this->cookie->exists('remember');
     }
 
     public function setUserFromSession()
@@ -103,14 +110,45 @@ class Auth
         $this->user = $user;
     }
 
-    public function hasRecaller()
+    private function setRememberToken($user)
     {
-        //
+        list($identifier, $token) = $this->recaller->generate();
+
+        $this->cookie->set('remember', $this->recaller->generateValueForCookie($identifier, $token));
+
+        $this->userProvider->setUserRememberToken(
+            $user->id, $identifier, $this->recaller->getTokenHashForDatabase($token)
+        );
+    }
+
+    public function setUserFromCookie()
+    {
+        list($identifier, $token) = $this->recaller->splitCookieValue(
+            $this->cookie->get('remember')
+        );
+
+        if (!$user = $this->userProvider->getUserByRememberIdentifier($identifier)) {
+            $this->cookie->clear('remember');
+            return;
+        }
+
+        if (!$this->recaller->validateToken($token, $user->remember_token)) {
+            $this->userProvider->clearUserRememberToken($user->id);
+            $this->cookie->clear('remember');
+
+            throw new Exception();
+        }
+
+        $this->setUserSession($user);
     }
 
     public function logout()
     {
         $this->session->clear($this->key());
+        
+        if ($this->hasRecaller()) {
+            $this->cookie->clear('remember');
+        }
     }
 
 }

@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Auth\Auth;
-use App\Auth\Providers\UserProvider;
+use App\Auth\Recaller;
 use App\Auth\Hashing\HasherInterface;
+use App\Auth\Providers\UserProvider;
+use App\Cookie\CookieJar;
 use App\Session\SessionInterface;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 
@@ -23,9 +25,9 @@ class AuthServiceProvider extends AbstractServiceProvider
             return new Auth(
                 $container->get(SessionInterface::class),
                 $container->get(HasherInterface::class),
-//                new Recaller,
-//                $container->get(CookieJar::class),
-                new UserProvider
+                new Recaller,
+                new UserProvider,
+                $container->get(CookieJar::class)
             );
         });
     }

@@ -22,21 +22,30 @@ class UserProvider implements UserProviderInterface
 
     public function updateUserPasswordHash($id, $hash)
     {
-        // TODO: Implement updateUserPasswordHash() method.
+        return $this->getById($id)->update([
+            'password' => $hash
+        ]);
     }
 
     public function getUserByRememberIdentifier($identifier)
     {
-        // TODO: Implement getUserByRememberIdentifier() method.
+        return User::where('remember_identifier', $identifier)->first();
     }
 
     public function clearUserRememberToken($id)
     {
-        // TODO: Implement clearUserRememberToken() method.
+        return $this->getById($id)->update([
+            'remember_token' => null,
+            'remember_identifier' => null
+        ]);
+
     }
 
     public function setUserRememberToken($id, $identifier, $hash)
     {
-        // TODO: Implement setUserRememberToken() method.
+        return $this->getById($id)->update([
+            'remember_identifier' => $identifier,
+            'remember_token' => $hash,
+        ]);
     }
 }

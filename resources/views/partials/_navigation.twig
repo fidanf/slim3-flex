@@ -20,7 +20,7 @@
     <ul class="navbar-nav">
         {% if auth.check %}
           <li class="nav-item">
-            Welcome {{ auth.user.username }}
+            <span class="nav-link">Welcome {{ auth.user.username }}</span>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#" onclick="event.preventDefault(); document.getElementById('logout').submit();">Sign out</a>

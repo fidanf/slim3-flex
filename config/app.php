@@ -13,9 +13,11 @@ return [
         'App\Middlewares\ClearValidationErrors',
         'App\Middlewares\Authenticate',
         'App\Middlewares\CsrfGuard',
+        'App\Middlewares\AuthenticateFromCookie',
     ],
     'providers' => [
         'App\Providers\ViewServiceProvider',
+        'App\Providers\CookieServiceProvider',
         'App\Providers\AuthServiceProvider',
         'App\Providers\DatabaseServiceProvider',
         'App\Providers\SessionServiceProvider',
