@@ -27,41 +27,41 @@ class RegisterController extends Controller
         $this->auth = $auth;
     }
 
-        public function index(Request $request, Response $response)
-        {
-            return $this->view->render($response, 'auth/register.twig');
+    public function index(Request $request, Response $response)
+    {
+        return $this->view->render($response, 'auth/register.twig');
+    }
+
+    public function register(Request $request, Response $response)
+    {
+        $data = $this->validateRegistration($request);
+
+        $user = new User;
+
+        $user->fill([
+            'username' => $data['username'],
+            'email' => $data['email'],
+            'password' => $this->hasher->create($data['password']),
+        ]);
+
+        $user->save();
+
+        if($this->auth->attempt($user->email, $user->password)) {
+            return $response->withRedirect('/profile');
         }
 
-        public function register(Request $request, Response $response)
-        {
-            $data = $this->validateRegistration($request);
+        return $response->withRedirect('/');
+    }
 
-            $user = new User;
-
-            $user->fill([
-                'username' => $data['username'],
-                'email' => $data['email'],
-                'password' => $this->hasher->create($data['password']),
-            ]);
-
-            $user->save();
-
-            if($this->auth->attempt($user->email, $user->password)) {
-                return $response->withRedirect('/profile');
-            }
-
-            return $response->withRedirect('/');
-        }
-
-        protected function validateRegistration(Request $request)
-        {
-            return $this->validate($request, [
-               'email' => ['required', 'email', ['exists', User::class]],
-               'username' => ['required'],
-               'password' => ['required'],
-               'password_confirmation' => ['required', ['equals', 'password']],
-            ]);
-        }
+    protected function validateRegistration(Request $request)
+    {
+        return $this->validate($request, [
+           'email' => ['required', 'email', ['exists', User::class]],
+           'username' => ['required'],
+           'password' => ['required'],
+           'password_confirmation' => ['required', ['equals', 'password']],
+        ]);
+    }
 
 
 }
