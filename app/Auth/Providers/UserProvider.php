@@ -16,7 +16,7 @@ class UserProvider implements UserProviderInterface
 
     public function getById($id)
     {
-        return User::where('id', $id)->first();
+        return User::find($id);
 
     }
 
