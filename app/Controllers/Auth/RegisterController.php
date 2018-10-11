@@ -8,6 +8,7 @@ use App\Auth\Auth;
 use App\Auth\Hashing\HasherInterface;
 use App\Controllers\Controller;
 use App\Models\User;
+use App\Session\Flash;
 use App\Views\View;
 use Slim\Http\Request;
 use Slim\Http\Response;
@@ -20,11 +21,14 @@ class RegisterController extends Controller
 
     protected $auth;
 
-    public function __construct(View $view, HasherInterface $hasher, Auth $auth)
+    protected $flash;
+
+    public function __construct(View $view, HasherInterface $hasher, Auth $auth, Flash $flash)
     {
         $this->view = $view;
         $this->hasher = $hasher;
         $this->auth = $auth;
+        $this->flash = $flash;
     }
 
     public function index(Request $request, Response $response)
@@ -36,17 +40,14 @@ class RegisterController extends Controller
     {
         $data = $this->validateRegistration($request);
 
-        $user = new User;
-
-        $user->fill([
+        User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => $this->hasher->create($data['password']),
         ]);
 
-        $user->save();
-
-        if($this->auth->attempt($user->email, $user->password)) {
+        if ($this->auth->attempt($data['email'], $data['password'])) {
+            $this->flash->now('success', 'You were successfully registered!');
             return $response->withRedirect('/profile');
         }
 
