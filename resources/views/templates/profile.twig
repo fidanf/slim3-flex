@@ -4,13 +4,5 @@
     <h1>Profile</h1>
 
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa, hic.</p>
-
-	<ul>
-		{% for user in users %}
-    	    <li>{{ user.email }} | {{ user.username }}</li>
-    	{% endfor %}
-	</ul>
-
-	{{ users.links | raw }}
 {% endblock %}
 
