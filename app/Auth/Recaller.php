@@ -6,6 +6,8 @@ class Recaller
 {
     protected $separator = '|';
 
+    protected $key = 'remember';
+
     public function generate()
     {
         return [$this->generateIdentifier(), $this->generateToken()];
@@ -39,5 +41,10 @@ class Recaller
     protected function generateToken()
     {
         return bin2hex(random_bytes(32));
+    }
+
+    public function getKey()
+    {
+        return $this->key;
     }
 }

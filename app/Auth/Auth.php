@@ -96,7 +96,7 @@ class Auth
 
     public function hasRecaller()
     {
-        return $this->cookie->exists('remember');
+        return $this->cookie->exists($this->recaller->getKey());
     }
 
     public function setUserFromSession()
@@ -114,7 +114,10 @@ class Auth
     {
         list($identifier, $token) = $this->recaller->generate();
 
-        $this->cookie->set('remember', $this->recaller->generateValueForCookie($identifier, $token));
+        $this->cookie->set(
+            $this->recaller->getKey(),
+            $this->recaller->generateValueForCookie($identifier, $token)
+        );
 
         $this->userProvider->setUserRememberToken(
             $user->id, $identifier, $this->recaller->getTokenHashForDatabase($token)
@@ -124,17 +127,17 @@ class Auth
     public function setUserFromCookie()
     {
         list($identifier, $token) = $this->recaller->splitCookieValue(
-            $this->cookie->get('remember')
+            $this->cookie->get($this->recaller->getKey())
         );
 
         if (!$user = $this->userProvider->getUserByRememberIdentifier($identifier)) {
-            $this->cookie->clear('remember');
+            $this->cookie->clear($this->recaller->getKey());
             return;
         }
 
         if (!$this->recaller->validateToken($token, $user->remember_token)) {
             $this->userProvider->clearUserRememberToken($user->id);
-            $this->cookie->clear('remember');
+            $this->cookie->clear($this->recaller->getKey());
 
             throw new Exception();
         }
@@ -147,7 +150,7 @@ class Auth
         $this->session->clear($this->key());
 
         if ($this->hasRecaller()) {
-            $this->cookie->clear('remember');
+            $this->cookie->clear($this->recaller->getKey());
             $this->userProvider->clearUserRememberToken($this->user->id);
         }
     }
