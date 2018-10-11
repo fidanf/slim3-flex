@@ -27,6 +27,9 @@ class PaginationServiceProvider extends AbstractServiceProvider implements Boota
         });
 
         LengthAwarePaginator::defaultView('pagination/_bootstrap.twig');
+
+        // Display in views using 
+        // {{ users.links | raw }}
     }
 
     public function register()
