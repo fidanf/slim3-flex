@@ -8,9 +8,9 @@ The architecture is about using phpleague's Container package rather than the or
 
 - Data access using Laravel's **Eloquent ORM**
 - Rendering views and paginating with **Twig**. Also supports sharing services globally across views.
-- **Basics of authentication workflow** : user registration, login, logout, remember me, authorizations for routes through middlewares 
-- **Services and dependencies** loaded using Providers, allows autoloading exposed classnames/aliases inside other classes.
-- Separated, easy to setup app configuration files inside config/ folder 
+- **Basics of authentication workflow** : user registration, login, logout, remember me, authorizations for routes through middlewares.
+- **Services and dependencies** loaded using Providers, allows autoloading exposed classnames/aliases from inside other classes.
+- Separated, **easy to setup app configuration** files inside config/ folder 
 
 Various already implemented features : form validation, password hashing, session storage, csrf protection, ...
 
