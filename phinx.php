@@ -14,6 +14,10 @@ return [
         'migrations' => '%%PHINX_CONFIG_DIR%%/database/migrations',
         'seeds' => '%%PHINX_CONFIG_DIR%%/database/seeds'
     ],
+    'migration_base_class' => 'App\Support\Migrations\Migration',
+    'templates' => [
+        'file' => '%%PHINX_CONFIG_DIR%%/app/Support/Migrations/Migration.stub'
+    ],   
     'environments' => [
         'default_migration_table' => $config['migrations'],
         'default' => [
