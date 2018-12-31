@@ -13,5 +13,8 @@ return [
         'prefix' => ''
     ],
 
-    'migrations' => 'migrations'
+    'migrations' => [
+        'default_migration_table' => 'migrations',
+        'migration_base_class' => 'App\Support\Migrations\Migration',
+    ]
 ];

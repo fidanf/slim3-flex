@@ -1,32 +1,31 @@
 <?php 
-require __DIR__ . '/vendor/autoload.php';
 
 try {
-    (new Dotenv\Dotenv(__DIR__))->load();
+    (new Dotenv\Dotenv(base_path()))->load();
 } catch (Dotenv\Exception\InvalidPathException $e) {
     die($e);
 }
 
-$config = require __DIR__ . '/config/database.php';
+$config = new \Noodlehaus\Config(__DIR__ . '/config/database.php');
 
 return [
     'paths' => [
         'migrations' => '%%PHINX_CONFIG_DIR%%/database/migrations',
         'seeds' => '%%PHINX_CONFIG_DIR%%/database/seeds'
     ],
-    'migration_base_class' => 'App\Support\Migrations\Migration',
+    'migration_base_class' => $config->get('migrations.migration_base_class'),
     'templates' => [
         'file' => '%%PHINX_CONFIG_DIR%%/app/Support/Migrations/Migration.stub'
     ],   
     'environments' => [
-        'default_migration_table' => $config['migrations'],
+        'default_migration_table' => $config->get('migrations.default_migration_table'),
         'default' => [
-          	'adapter' => $config['db']['driver'],
-            'host' => $config['db']['host'],
-            'name' => $config['db']['database'],
-            'user' => $config['db']['username'],
-            'pass' => $config['db']['password'],
-            'port' => $config['db']['port'],
+          	'adapter' => $config->get('db.driver'),
+            'host' => $config->get('db.host'),
+            'name' => $config->get('db.database'),
+            'user' => $config->get('db.username'),
+            'pass' => $config->get('db.password'),
+            'port' => $config->get('db.port'),
         ]
     ]
 ];
