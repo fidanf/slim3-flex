@@ -6,12 +6,14 @@ try {
     die($e);
 }
 
-$config = new \Noodlehaus\Config(__DIR__ . '/config/database.php');
+$config = new \Noodlehaus\Config(
+    base_path('config/database.php')
+);
 
 return [
     'paths' => [
-        'migrations' => '%%PHINX_CONFIG_DIR%%/database/migrations',
-        'seeds' => '%%PHINX_CONFIG_DIR%%/database/seeds'
+        'migrations' => $config->get('migrations.paths.migrations'),
+        'seeds' => $config->get('migrations.paths.seeds')
     ],
     'migration_base_class' => $config->get('migrations.migration_base_class'),
     'templates' => [

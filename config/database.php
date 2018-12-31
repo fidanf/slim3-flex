@@ -16,5 +16,12 @@ return [
     'migrations' => [
         'default_migration_table' => 'migrations',
         'migration_base_class' => 'App\Support\Migrations\Migration',
+        'paths' => [
+            'migrations' => base_path('database/migrations'),
+            'seeds' => base_path('database/seeds')
+        ],
+        'templates' => [
+            'file' => base_path('app/Support/Migrations/Migration.stub')
+        ]
     ]
 ];
