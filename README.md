@@ -21,3 +21,16 @@ Various already implemented features : form validation, password hashing, sessio
 - Events and listeners
 - A logger service using Monolog
 - Filesystem service
+
+### Run commands
+
+    composer install
+    ./vendor/bin/phinx migrate
+
+If you wish to rollback to the last migration, do :
+
+    ./vendor/bin/phinx rollback
+
+Serving the project locally using PHP's internal webserver :
+
+    php -S localhost:<port> -t public/
