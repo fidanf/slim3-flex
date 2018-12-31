@@ -1,28 +1,27 @@
 <?php
+
 namespace App\Support\Migrations;
 
-use Illuminate\Database\Capsule\Manager as Capsule;
+use Noodlehaus\Config;
 use Phinx\Migration\AbstractMigration;
+use Illuminate\Database\Capsule\Manager as Capsule;
 
 class Migration extends AbstractMigration {
+
     /** @var \Illuminate\Database\Capsule\Manager $capsule */
     public $capsule;
+
     /** @var \Illuminate\Database\Schema\Builder $capsule */
     public $schema;
+
     public function init()
     {
+        $config = new \Noodlehaus\Config(
+            base_path('config/database.php')
+        );
+
         $this->capsule = new Capsule;
-        $this->capsule->addConnection([
-          'driver' => env('DB_DRIVER'),
-          'host' => env('DB_HOST'),
-          'database' => env('DB_DATABASE'),
-          'username' => env('DB_USERNAME'),
-          'password' => env('DB_PASSWORD'),
-          'charset' => 'utf8',
-          'port' => env('DB_PORT'),
-          'collation' => 'utf8_unicode_ci',
-          'prefix' => ''
-        ]);
+        $this->capsule->addConnection($config->get('db'));
         $this->capsule->bootEloquent();
         $this->capsule->setAsGlobal();
         $this->schema = $this->capsule->schema();
