@@ -16,7 +16,7 @@ class Migration extends AbstractMigration {
 
     public function init()
     {
-        $config = new \Noodlehaus\Config(
+        $config = new Config(
             base_path('config/database.php')
         );
 
