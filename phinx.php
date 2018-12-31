@@ -17,7 +17,7 @@ return [
     ],
     'migration_base_class' => $config->get('migrations.migration_base_class'),
     'templates' => [
-        'file' => '%%PHINX_CONFIG_DIR%%/app/Support/Migrations/Migration.stub'
+        'file' => $config->get('migrations.templates.file')
     ],   
     'environments' => [
         'default_migration_table' => $config->get('migrations.default_migration_table'),
