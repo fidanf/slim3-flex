@@ -3,13 +3,13 @@
 namespace App\Views;
 
 use Psr\Http\Message\ResponseInterface;
-use Twig_Environment;
+use Twig\Environment;
 
 class View
 {
     protected $twig; 
 
-    public function __construct(Twig_Environment $twig)
+    public function __construct(Environment $twig)
     {
         $this->twig = $twig;
     }
