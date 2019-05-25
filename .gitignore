@@ -1,5 +1,4 @@
 vendor/
 .env
 .idea/
-composer.lock
 sqlite.db

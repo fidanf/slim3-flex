@@ -1,5 +1,5 @@
 {
-    "name": "fidanzaepsi/slim-flex",
+    "name": "fidanf/slim-flex",
     "description": "slim-flex",
     "keywords": ["framework", "slim"],
     "type": "project",
@@ -7,7 +7,7 @@
     "authors": [
         {
             "name": "Fidanza Frank",
-            "email": "frank.fidanza@epsi.fr"
+            "email": "frank.fidanza@rgsystem.com"
         }
     ],
     "require": {
