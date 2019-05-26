@@ -7,7 +7,7 @@
     "authors": [
         {
             "name": "Fidanza Frank",
-            "email": "frank.fidanza@rgsystem.com"
+            "email": "fidanza.frank@gmail.com"
         }
     ],
     "require": {
@@ -20,7 +20,8 @@
         "twig/twig": "^2.4",
         "illuminate/database": "^5.6",
         "illuminate/pagination": "^5.6",
-        "robmorgan/phinx": "^0.10.6"
+        "robmorgan/phinx": "^0.10.6",
+        "swiftmailer/swiftmailer": "5.4"
     },
     "require-dev": {
         "symfony/var-dumper": "^3.2",

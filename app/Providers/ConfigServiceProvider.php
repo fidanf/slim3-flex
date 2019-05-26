@@ -46,7 +46,8 @@ class ConfigServiceProvider extends AbstractServiceProvider implements BootableS
             return new Config([
                 base_path('config/app.php'),
                 base_path('config/database.php'),
-                base_path('config/views.php')
+                base_path('config/views.php'),
+                base_path('config/mail.php'),
             ]);
         });
 
@@ -54,7 +55,8 @@ class ConfigServiceProvider extends AbstractServiceProvider implements BootableS
             return new Config([
                 base_path('config/app.php'),
                 base_path('config/database.php'),
-                base_path('config/views.php')
+                base_path('config/views.php'),
+                base_path('config/mail.php')
             ]);
         });
 

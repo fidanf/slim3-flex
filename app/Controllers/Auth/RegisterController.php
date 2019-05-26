@@ -3,10 +3,11 @@
 
 namespace App\Controllers\Auth;
 
-
 use App\Auth\Auth;
 use App\Auth\Hashing\HasherInterface;
 use App\Controllers\Controller;
+use App\Email\Mailer;
+use App\Email\Templates\Welcome;
 use App\Models\User;
 use App\Session\Flash;
 use App\Views\View;
@@ -23,12 +24,15 @@ class RegisterController extends Controller
 
     protected $flash;
 
-    public function __construct(View $view, HasherInterface $hasher, Auth $auth, Flash $flash)
+    private $mailer;
+
+    public function __construct(View $view, HasherInterface $hasher, Auth $auth, Flash $flash, Mailer $mailer)
     {
         $this->view = $view;
         $this->hasher = $hasher;
         $this->auth = $auth;
         $this->flash = $flash;
+        $this->mailer = $mailer;
     }
 
     public function index(Request $request, Response $response)
@@ -40,11 +44,14 @@ class RegisterController extends Controller
     {
         $data = $this->validateRegistration($request);
 
-        User::create([
+        $user = User::create([
             'username' => $data['username'],
             'email' => $data['email'],
             'password' => $this->hasher->create($data['password']),
         ]);
+
+        // Send welcome email to newly registered user
+        $this->mailer->to($user->email, $user->username)->send(new Welcome($user));
 
         if ($this->auth->attempt($data['email'], $data['password'])) {
             $this->flash->now('success', 'You were successfully registered!');

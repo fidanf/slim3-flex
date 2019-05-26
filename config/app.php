@@ -27,5 +27,6 @@ return [
         'App\Providers\ValidationServiceProvider',
         'App\Providers\ViewShareServiceProvider',
         'App\Providers\PaginationServiceProvider',
+        'App\Providers\MailServiceProvider',
     ]
 ];
