@@ -12,15 +12,17 @@ The architecture is about using phpleague's Container package rather than the or
 - **Services and dependencies** loaded using Providers, allows autoloading exposed classnames/aliases from inside other classes.
 - Separated, **easy to setup app configuration** files inside config/ folder 
 - Seeds and migrations using **Phinx**
+- Email sending using **Swiftmailer v6+**
 
 Various already implemented features : form validation, password hashing, session storage, csrf protection, ...
 
 ## Upcoming 
 
-- A Mail service using Mailable classes
 - Events and listeners
 - A logger service using Monolog
 - Filesystem service
+- Facades
+- Console commands
 
 ### Run commands
 
