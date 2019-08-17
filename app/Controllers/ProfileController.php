@@ -18,6 +18,6 @@ class ProfileController extends Controller
 
     public function index(Request $request, Response $response)
     {
-        return $this->view->render($response, 'templates/profile.twig', compact('users'));
+        return $this->view->render($response, 'templates/profile.twig');
     }
 }
