@@ -21,7 +21,7 @@
         "illuminate/database": "^5.8",
         "illuminate/pagination": "^5.8",
         "robmorgan/phinx": "^0.10.8",
-        "swiftmailer/swiftmailer": "6.2"
+        "swiftmailer/swiftmailer": "^6.2"
     },
     "require-dev": {
         "symfony/var-dumper": "^4.3",
@@ -34,11 +34,9 @@
         "files": ["app/helpers.php"]
     },
     "scripts": {
-        "post-root-package-install": [
-            "php -r \"file_exists('.env') ?: copy('.env.dist', '.env');\""
+        "post-install-cmd": [
+            "@copy-env"
         ],
-        "post-update-cmd": [
-            "php -r \"file_exists('.env') ?: copy('.env.dist', '.env');\""
-        ]
+        "copy-env": "@php -r \"file_exists('.env') ?: copy('.env.dist', '.env');\""
     }
 }
