@@ -12,20 +12,20 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "slim/slim": "^3.8",
+        "slim/slim": "^3.12",
         "vlucas/valitron": "^1.4",
-        "vlucas/phpdotenv": "^2.4",
+        "vlucas/phpdotenv": "^3.4",
         "league/container": "^2.4",
-        "hassankhan/config": "^1.0",
-        "twig/twig": "^2.4",
-        "illuminate/database": "^5.6",
-        "illuminate/pagination": "^5.6",
-        "robmorgan/phinx": "^0.10.6",
-        "swiftmailer/swiftmailer": "5.4"
+        "hassankhan/config": "^2.0",
+        "twig/twig": "^2.11 ",
+        "illuminate/database": "^5.8",
+        "illuminate/pagination": "^5.8",
+        "robmorgan/phinx": "^0.10.8",
+        "swiftmailer/swiftmailer": "6.2"
     },
     "require-dev": {
-        "symfony/var-dumper": "^3.2",
-        "phpunit/phpunit": "^5.6"
+        "symfony/var-dumper": "^4.3",
+        "phpunit/phpunit": "^6.5"
     },
     "autoload": {
         "psr-4": {

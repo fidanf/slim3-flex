@@ -1,7 +1,8 @@
 <?php 
 
 try {
-    (new Dotenv\Dotenv(base_path()))->load();
+    $dotenv = Dotenv\Dotenv::create(__DIR__);
+    $dotenv->load();
 } catch (Dotenv\Exception\InvalidPathException $e) {
     die($e);
 }
